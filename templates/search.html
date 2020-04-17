@@ -2,9 +2,32 @@
 <html>
   <head>
     <title>find your next job at Recruit Site!</title>
+    <style>
+      section {
+        display:grid;
+        gap:20px;
+        grid-template-columns: repeat(4,1fr);
+      }
+    </style>
   </head>
   <body>
     <h1>Jobs Results</h1>
-    <h3>You are looking forward jobs in {{word}}</h3>
+    <h3>We Found {{length}} results for: {{word}}</h3>
+    <a href="/export?word={{word}}">Export to CSV</a>
+    
+    <section>
+      <h4>Title</h4>
+      <h4>Company</h4>
+      <h4>Location</h4>
+      <h4>Link</h4>
+      <!-- Flask에서는 python 구문을 정해진 틀 안에 넣어서 사용가능 -->
+      {% for job in jobs %}
+        <span>{{job.title}}</span>
+        <span>{{job.company}}</span>
+        <span>{{job.location}}</span>
+        <!-- _blank : 새창으로 연결 , _self : 현재창으로 연결-->
+        <a href = "{{job.link}}" target="_blank">Apply</a>
+      {% endfor %}
+    </section>
   </body>
 </html>
